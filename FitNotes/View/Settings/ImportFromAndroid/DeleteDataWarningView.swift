@@ -18,7 +18,7 @@ struct DataDeleteWarningView: View {
     @Query private var exercises: [Exercise]
     @Query private var categories: [ExerciseCategory]
     
-    @State private var alertPresented = true
+    @State private var alertPresented = false
     @State private var confirmationString: String = ""
     @State private var isConfirmButtonEnabled = false
     @State private var shouldProgressView = false

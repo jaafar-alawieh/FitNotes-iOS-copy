@@ -11,7 +11,7 @@ import SwiftData
 @Model
 class Exercise {
     
-    init(name: String, category: ExerciseCategory, uses_reps: Bool = true, uses_weight: Bool = true, weight_unit: WeightUnit = WeightUnit.default, weight_increment: Double? = nil, uses_distance: Bool = false, distance_unit: DistanceUnit = DistanceUnit.default, distance_increment: Double? = nil, uses_time: Bool = false, time_unit: TimeUnit = TimeUnit.default, time_increment: Double? = nil, notes: String? = nil, rest_time_second: Int? = nil) {
+    init(name: String, category: ExerciseCategory? = nil, uses_reps: Bool = true, uses_weight: Bool = true, weight_unit: WeightUnit = WeightUnit.default, weight_increment: Double? = nil, uses_distance: Bool = false, distance_unit: DistanceUnit = DistanceUnit.default, distance_increment: Double? = nil, uses_time: Bool = false, time_unit: TimeUnit = TimeUnit.default, time_increment: Double? = nil, notes: String = "", rest_time_second: Int? = nil) {
         self.name = name
         self.category = category
         self.uses_reps = uses_reps
@@ -52,10 +52,11 @@ class Exercise {
     var time_unit: TimeUnit
     var time_increment: Double?
     
-    var notes: String?
+    var notes: String
     
     var rest_time_second: Int?
     
+    @Relationship(deleteRule: .cascade, inverse: \WorkoutGroup.exercise)
     var groups: [WorkoutGroup]
     
 }

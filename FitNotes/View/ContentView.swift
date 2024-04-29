@@ -34,9 +34,6 @@ struct ContentView: View {
                 .navigationDestination(for: WorkoutGroup.self) { group in
                     TrackView(path: $path, group: group)
                 }
-                .onAppear {
-                    path.append("ImportFromAndroid")
-                }
         }
     }
 }

@@ -5,7 +5,11 @@
 //  Created by Myles Verdon on 26/12/2023.
 //
 
-enum WeightUnit: String, Codable, CaseIterable {
+
+protocol PickerEnum: RawRepresentable, Codable, Hashable, CaseIterable where RawValue == String {}
+
+
+enum WeightUnit: String, Codable, CaseIterable, PickerEnum {
     case `default` = "Default"
     case kg = "KG"
     case lb = "Lb"
@@ -67,7 +71,7 @@ enum WeightUnit: String, Codable, CaseIterable {
     
 }
 
-enum DistanceUnit: String, Codable, CaseIterable {
+enum DistanceUnit: String, Codable, CaseIterable, PickerEnum {
     case `default` = "Default"
     case miles = "Miles"
     case kilometers = "Km"
@@ -151,7 +155,7 @@ enum DistanceUnit: String, Codable, CaseIterable {
     
 }
 
-enum TimeUnit: String, Codable, CaseIterable {
+enum TimeUnit: String, Codable, CaseIterable, PickerEnum {
     case `default` = "Default"
     case seconds = "Sec"
     case minutes = "Min"

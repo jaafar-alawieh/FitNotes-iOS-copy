@@ -12,10 +12,10 @@ import SwiftData
 @Model
 class ExerciseCategory {
     
-    init(name: String, colour: String = "#FFFFFF", exercises: [Exercise] = []) {
+    init(name: String, colour: String = "#FFFFFF") {
         self.name = name
         self.colour = colour
-        self.exercises = exercises
+        self.exercises = [Exercise]()
     }
     
     

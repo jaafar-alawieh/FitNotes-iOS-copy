@@ -31,11 +31,11 @@ let previewContainer: ModelContainer = {
             container.mainContext.insert(exercise)
         }
         
-        
-        let group = WorkoutGroup(dayGroupId: 0, exercise: try! ExerciseDefaultData.filter(#Predicate<Exercise> { exercise in
+        let exercise = try! ExerciseDefaultData.filter(#Predicate<Exercise> { exercise in
             exercise.name == "Deadlift"
-        })[0])
-        container.mainContext.insert(group)
+        })[0]
+        let group = WorkoutGroup(dayGroupId: 0)
+        exercise.groups.append(group)
         
         group.entries.append(WorkoutSet(id: 1, reps: 1, weightKilograms: 100, is_personal_record: false))
         group.entries.append(WorkoutSet(id: 2, reps: 2, weightKilograms: 100, is_personal_record: false))

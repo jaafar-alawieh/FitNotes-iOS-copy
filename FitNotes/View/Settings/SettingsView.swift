@@ -41,10 +41,23 @@ struct SettingsView: View {
         NavigationView {
             List {
                 
-                Section(header: Text("Import data")) {
+                Section {
                     HStack {
                         NavigationLink(value: "ImportFromAndroid") {
                             Text("Import from FitNotes Android")
+                        }
+                    }
+                }
+                
+                Section {
+                    HStack {
+                        NavigationLink(destination: ManageExerciseView()) {
+                            Text("Manage Exercises")
+                        }
+                    }
+                    HStack {
+                        NavigationLink(value: "EditCategoriesView") {
+                            Text("Manage Categories")
                         }
                     }
                 }
@@ -60,7 +73,7 @@ struct SettingsView: View {
                     }
                     TextField("Distance Increment", value: $defaultDistanceIncrement, formatter: NumberFormatter())
                     TextField("Weight Increment", value: $defaultTimeIncrement, formatter: NumberFormatter())
-
+                    
                 }
                 
                 Section(header: Text("Default Units")) {
@@ -119,7 +132,9 @@ struct SettingsView: View {
 #Preview {
     
     NavigationStack {
-        SettingsView().navigationTitle(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=Title@*/Text("Title")/*@END_MENU_TOKEN@*/)
+        SettingsView()
+            .navigationTitle("Settings")
+            .navigationBarTitleDisplayMode(.inline)
     }
     
 }

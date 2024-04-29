@@ -15,22 +15,25 @@ struct SelectExercise: View {
     @Binding var path: NavigationPath
     var date: Date
     
+    @Query var exercises: [Exercise]
+
+    @State var searchText = ""
+    @State var selectedCategories: Set<ExerciseCategory> = []
+    
+    var searchResults: [Exercise] {
+        if searchText.isEmpty {
+            return selectedCategories.isEmpty ? exercises : exercises.filter { selectedCategories.contains($0.category!) }
+        } else {
+            return exercises.filter { $0.name.contains(searchText) && (selectedCategories.isEmpty || selectedCategories.contains($0.category!)) }
+        }
+    }
     
     @Query var queriedGroups: [WorkoutGroup]
     var numGroupsInDay: Int {
         queriedGroups.filter({ Calendar.current.compare($0.date, to: date, toGranularity: .day) == .orderedSame }).count
     }
     
-    @State var searchText = ""
     
-    @Query var exercises: [Exercise]
-    var searchResults: [Exercise] {
-        if searchText.isEmpty {
-            return exercises
-        } else {
-            return exercises.filter { $0.name.contains(searchText) }
-        }
-    }
     
     var body: some View {
         List(searchResults) { exercise in
@@ -41,14 +44,18 @@ struct SelectExercise: View {
                         .frame(width: 10, height: 10)
                     Text(exercise.name)
                 }
-            }).onTapGesture {
-                let newGroup = WorkoutGroup(dayGroupId: numGroupsInDay, date: date, exercise: exercise)
-                modelContext.insert(newGroup)
+            })
+            .onTapGesture {
+                let newGroup = WorkoutGroup(dayGroupId: numGroupsInDay, date: date)
+                exercise.groups.append(newGroup)
+                try! modelContext.save()
+                
                 path = NavigationPath([newGroup])
             }
         }
         .navigationBarTitleDisplayMode(.large)
-        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
+        
+        ExerciseSearchView(selectedCategories: $selectedCategories, searchText: $searchText)
     }
     
 }

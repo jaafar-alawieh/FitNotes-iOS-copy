@@ -97,12 +97,9 @@ struct TrackView: View {
                     HStack {
                         if (exercise.uses_reps) {
                             NumericInputView(value: $reps, title: "Reps", incrementAmount: 1)
-                                .onChange(of: reps) { _, newReps in
-//                                    TODO print(newReps)
-                                }
                         }
                         if (exercise.uses_distance) {
-                            NumericInputView(value: $distance, title: "Weight", incrementAmount: exercise.weight_increment ?? 2.5)
+                            NumericInputView(value: $distance, title: "Distance", incrementAmount: exercise.distance_increment ?? 2.5)
                         }
                     }
                     
@@ -111,7 +108,7 @@ struct TrackView: View {
                             NumericInputView(value: $weight, title: "Weight", incrementAmount: exercise.weight_increment ?? 2.5)
                         }
                         if (exercise.uses_time) {
-                            NumericInputView(value: $time, title: "Weight", incrementAmount: exercise.weight_increment ?? 2.5)
+                            NumericInputView(value: $time, title: "Time", incrementAmount: exercise.time_increment ?? 2.5)
                         }
                     }
                     
@@ -166,6 +163,9 @@ struct TrackView: View {
                         }
                     }
             }
+            .onAppear {
+                print("HEREHRERE")
+            }
             .frame(width: geometry.size.width)
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden()
@@ -198,7 +198,7 @@ struct TrackView: View {
                 //                }
                 
             }.sheet(isPresented: $isEditExerciseSheetOpen, content: {
-                EditExerciseView()
+                ManageExerciseView()
             })
             .background(
                 Rectangle()

@@ -11,7 +11,7 @@ import SwiftData
 @Model
 class WorkoutSet {
     
-    init(id: Int, group: WorkoutGroup? = nil, reps: Double = 0, weightKilograms: Double = 0, distanceMeters: Double = 0, timeSeconds: Double = 0, is_personal_record: Bool, is_complete: Bool? = nil) {
+    init(id: Int, group: WorkoutGroup? = nil, reps: Double = 0, weightKilograms: Double = 0, distanceMeters: Double = 0, timeSeconds: Double = 0, is_personal_record: Bool = false, is_complete: Bool? = nil) {
         
         self.id = id
         self.group = group
