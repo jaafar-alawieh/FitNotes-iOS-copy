@@ -1,4 +1,4 @@
-### Heavily inspired by my desire to have the [FitNotes Android (https://www.fitnotesapp.com/) when I transitioned to iPhone. This Swift app is intended for personal use (for now).
+### Heavily inspired by my desire to have the [FitNotes Android](https://www.fitnotesapp.com/) when I transitioned to iPhone. This Swift app is intended for personal use (for now).
 
 # FitNotes-iOS
 
