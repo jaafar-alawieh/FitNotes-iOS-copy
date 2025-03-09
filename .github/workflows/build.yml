@@ -1,0 +1,36 @@
+name: Build iOS App
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: macos-latest  # You can change to 'macos-14' to use the latest Sonoma image if desired
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Optional: Install CocoaPods dependencies if your project uses CocoaPods
+      - name: Install CocoaPods
+        run: |
+          if [ -f Podfile ]; then
+            sudo gem install cocoapods
+            pod install
+          fi
+
+      # Build the app – adjust these commands based on your project structure
+      - name: Build the app
+        run: |
+          # If you have a workspace:
+          xcodebuild -workspace FitNotes.xcworkspace \
+                     -scheme FitNotes \
+                     -configuration Release \
+                     clean build
+          # Uncomment the following if you use an Xcode project instead:
+          # xcodebuild -project FitNotes.xcodeproj \
+          #            -scheme FitNotes \
+          #            -configuration Release \
+          #            clean build
