@@ -24,4 +24,4 @@ jobs:
           xcodebuild -project FitNotes.xcodeproj \
                      -scheme FitNotes \
                      -configuration Release \
-                     clean build
+                     clean build CODE_SIGNING_ALLOWED=NO
